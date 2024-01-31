@@ -1,8 +1,11 @@
 // 导入 express
+// express 不允许 连续两次调用两次 res.send() -> 报错 Cannot set headers after they are sent to the client
 const express = require('express')
 
 // 创建服务器实例对象
 const app = express()
+
+const joi = require('joi')
 
 // 导入并配置 cors 中间件
 const cors = require('cors')
@@ -27,6 +30,16 @@ app.use((req, res, next) => {
 // 导入并使用路由模块
 const userRouter = require('./router/user')
 app.use('/api', userRouter)
+
+// 定义错误级别的中间件,只有错误级别的中间件放在路由之后
+app.use((err, req, res, next) => {
+    // 验证失败导致的错误
+    if (err instanceof joi.ValidationError) {
+        return res.cc(err)
+    }
+    // 未知的错误
+    res.cc(err)
+})
 
 // 启动服务器
 app.listen(3007, () => {
