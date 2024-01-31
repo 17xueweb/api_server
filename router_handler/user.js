@@ -1,5 +1,8 @@
 const db = require('../db/index')
 
+// 导入 bcryptjs 包
+const bcrypt = require('bcryptjs')
+
 // 注册新用户处理函数
 exports.regUser = (req, res) => {
     // 获取客户端提交到服务器的用户信息
@@ -31,7 +34,9 @@ exports.regUser = (req, res) => {
             })
         }
     })
-    // res.send('reguser ok.')
+    // 利用 bcryptjs 中的 hashSync 对密码进行加密
+    userInfo.password = bcrypt.hashSync(userInfo.password, 10)
+    console.log(userInfo);
 }
 
 // 登录的处理函数
