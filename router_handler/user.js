@@ -45,5 +45,18 @@ exports.regUser = (req, res) => {
 
 // 登录的处理函数
 exports.login = (req, res) => {
-    res.send('login ok.')
+    // 1. 接收表单的数据
+    const userInfo = req.body
+    // 2. 定义 SQL 语句
+    const sqlStr = 'select * from ev_users where username = ?'
+    // 3. 执行 SQL 语句，根据用户名查询用户信息
+    db.query(sqlStr, userInfo.username, (err, results) => {
+        // 执行 SQL 语句失败
+        if (err) return res.cc(err)
+        // 执行 SQL 语句成功，但是获取到的条数不等于1
+        if (results.length !== 1) return res.cc('登录失败！')
+        // 判断密码是否正确
+        res.send('ok')
+    })
+    
 }
