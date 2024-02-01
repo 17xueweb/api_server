@@ -51,3 +51,8 @@
 2. 导入 jsonwebtoken 包
 3. 根目录新建一个 config.js 文件 用做全局配置文件，配置token 生成的秘钥和token过期时间
 4. 利用 jwt.sign() 生成 token 字符串
+
+#### 2.6.5 配置解析 token 的中间件
+1. 导入 express-jwt 包
+2. 在 app.js 路由之前 配置 解析 token 的中间件
+3. app.js 错误级别的中间件中 增加解析失败错误提示
