@@ -2,9 +2,10 @@ const express = require('express')
 
 const router = express.Router()
 
+// 导入用户信息路由处理函数模块
+const userinfo_handler = require('../router_handler/userinfo')
+
 // 获取用户基本信息的路由
-router.get('/userinfo', (req, res) => {
-    res.send('ok')
-})
+router.get('/userinfo', userinfo_handler.getUserInfo)
 
 module.exports = router
