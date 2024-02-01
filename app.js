@@ -38,6 +38,9 @@ app.use(expressJwt({ secret: config.jwtSecretKey}).unless({path: [/^\/api/]}))
 // 导入并使用路由模块
 const userRouter = require('./router/user')
 app.use('/api', userRouter)
+// 导入并使用用户信息模块
+const userinfoRouter = require('./router/userinfo')
+app.use('/my', userinfoRouter)
 
 // 定义错误级别的中间件,只有错误级别的中间件放在路由之后
 app.use((err, req, res, next) => {
