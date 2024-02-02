@@ -39,5 +39,16 @@ exports.updateUserInfo = (req, res) => {
 
 // 更新用户密码的处理函数
 exports.updatePassword = (req, res) => {
-    res.send('ok')
+    // 根据 id 查询用户是否存在
+    const sqlStr = 'select * from ev_users where id = ?'
+    // 身份认证成功后，express-jwt中间件会往 req 上挂载一个 user属性 属性值为用户信息
+    db.query(sqlStr, req.user.id, (err, results) => {
+        // 执行 SQL 语句失败
+        if (err) return res.cc(err)
+        // 判断结果是否存在
+        if (results.length !== 1) return res.cc('用户不存在！')
+
+        // TODO: 判断用户输入的旧密码是否正确
+    })
+    // res.send('ok')
 }
