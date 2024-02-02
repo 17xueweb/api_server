@@ -10,6 +10,9 @@ const id = joi.number().integer().min(1).required()
 const nickname = joi.string().required()
 const user_email = joi.string().email().required()
 
+// 定义头像的验证规则 dataUri() 表示 校验是否是 base64格式
+const avatar = joi.string().dataUri().required()
+
 // 定义验证注册和登录表单数据的规则对象
 exports.reg_login_schema = {
     // 表示 需要对 body 中的数据进行验证 因为是post请求
@@ -39,6 +42,14 @@ exports.update_password_schema = {
   body: {
     oldPwd: password,
     newPwd: joi.not(joi.ref('oldPwd')).concat(password)
+  }
+}
+
+// avatar: avatar 第一个avatar表示前端传来的字段 第二个avatar表示自定义校验
+// 验证规则 - 更新头像
+exports.update_avatar_schema = {
+  body: {
+    avatar: avatar
   }
 }
 
