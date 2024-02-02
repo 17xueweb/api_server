@@ -28,6 +28,20 @@ exports.update_userinfo_schema = {
   }
 }
 
+// 定义更新密码的验证规则对象
+/**
+ * newPwd: joi.ref('password') 表示 新密码 与 password 相等
+ * newPwd: joi.not(joi.ref('password')) 表示 新密码不与 password 相等
+ * newPwd: joi.not(joi.ref('password')).concat(password) 表示 新密码不与旧密码相等，同时新密码使用旧密码的验证规则 concat连接
+ * 
+ */
+exports.update_password_schema = {
+  body: {
+    oldPwd: password,
+    newPwd: joi.not(joi.ref('password')).concat(password)
+  }
+}
+
 /**
  * 为什么导出的时候 需要写上body
  * 因为：post请求，req.body来获取前端传来的参数
