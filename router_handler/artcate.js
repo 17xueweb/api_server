@@ -20,5 +20,25 @@ exports.getArtCates = (req, res) => {
 
 // 新增文章分类的处理函数
 exports.addArticleCates = (req, res) => {
-    res.send('ok')
+    // 1. 定义查重的 SQL 语句
+    const sqlStr = 'select * from ev_article_cate where name = ? or alias = ?'
+    // 执行查重的 SQL 语句
+    db.query(sqlStr, [req.body.name, req.body.alias], (err, results) => {
+        if (err) return res.cc(err)
+        // 判断数据的length
+        if (results.length === 2) return res.cc('分类名称与分类别名被占用，请更换后重试！')
+        // length 等于 1 的三种情况，第一种
+        if (results.length === 1 && results[0].name === req.body.name && results[0].alias === req.body.alias) {
+            return res.cc('分类名称与分类别名被占用，请更换后重试！')
+        }
+        // length 等于 1 的第二种情况
+        if (results.length === 1 && results[0].name === req.body.name) {
+            return res.cc('分类名称被占用，请更换后重试！')
+        }
+        if (results.length === 1 && results[0].alias === req.body.alias) {
+            return res.cc('分类别名被占用，请更换后重试！')
+        }
+
+        // TODO: 分类名称和分类别名都可以用
+    })
 }
