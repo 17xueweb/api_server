@@ -17,3 +17,8 @@ exports.getArtCates = (req, res) => {
         })
     })
 }
+
+// 新增文章分类的处理函数
+exports.addArticleCates = (req, res) => {
+    res.send('ok')
+}
