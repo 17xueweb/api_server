@@ -47,8 +47,8 @@ exports.updatePassword = (req, res) => {
         if (err) return res.cc(err)
         // 判断结果是否存在
         if (results.length !== 1) return res.cc('用户不存在！')
+        res.cc('ok')
 
         // TODO: 判断用户输入的旧密码是否正确
     })
-    // res.send('ok')
 }

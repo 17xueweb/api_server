@@ -30,15 +30,15 @@ exports.update_userinfo_schema = {
 
 // 定义更新密码的验证规则对象
 /**
- * newPwd: joi.ref('password') 表示 新密码 与 password 相等
- * newPwd: joi.not(joi.ref('password')) 表示 新密码不与 password 相等
- * newPwd: joi.not(joi.ref('password')).concat(password) 表示 新密码不与旧密码相等，同时新密码使用旧密码的验证规则 concat连接
+ * newPwd: joi.ref('oldPwd') 表示 旧密码 与 新密码 相等
+ * newPwd: joi.not(joi.ref('oldPwd')) 表示 旧密码不与 新密码 相等
+ * newPwd: joi.not(joi.ref('oldPwd')).concat(password) 表示 新密码不与旧密码相等，同时新密码使用旧密码的验证规则 concat连接
  * 
  */
 exports.update_password_schema = {
   body: {
     oldPwd: password,
-    newPwd: joi.not(joi.ref('password')).concat(password)
+    newPwd: joi.not(joi.ref('oldPwd')).concat(password)
   }
 }
 
