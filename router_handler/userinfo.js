@@ -55,6 +55,16 @@ exports.updatePassword = (req, res) => {
         if (!compareResult) return res.cc('旧密码错误！')
 
         // TODO: 更新数据库中的密码
-        res.cc('ok')
+        const sqlStr = 'update ev_users set password = ? where id = ?'
+        // 对新密码进行加密
+        const newPwd = bcrypt.hashSync(req.body.newPwd, 10)
+        // 调用 db.query() 执行 SQL 语句
+        db.query(sqlStr, [newPwd, req.user.id], (err, results) => {
+            // 执行 SQL 语句失败
+            if (err) return res.cc(err)
+            // 判断影响行数
+            if (results.affectedRows !== 1) return res.cc('更新密码失败！')
+            res.cc('更新密码成功！', 0)
+        })
     })
 }
