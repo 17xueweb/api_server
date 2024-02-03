@@ -169,3 +169,25 @@ const sql = 'select * from ev_article_cate where Id <> ? and (name = ? or alias 
    - 一条数据，别名被占用
 
 #### 4.6.3 实现更新文章分类功能
+
+## 5. 文章管理
+
+### 5.1 新建表 ev_articles 文章表
+1. 表字段包括：
+- 主键 id int(整数类型) 主键(PK)/不为空(NN)/唯一性(UQ)/自增(AI) 
+- 文章标题 title varchar(255)字符串 不为空
+- 文章内容 content TEXT(文章内容比较长，不限制具体长度，是一个大型的文本) 不为空
+- 文章封面图片 cover_img varchar(255) 不为空
+- 发布日期 pub_date varchar(255) 不为空
+- 文章发布状态 state varchar(255) 不为空
+- 文章是否删除 is_delete TINYINT(1) 布尔值 0 - 未删除 1- 已删除  不为空
+- 文章所属分类id cate_id INT 不为空 
+- 文章所属作者id author_id INT 不为空
+
+### 5.2 实现步骤
+
+#### 5.2.1 初始化路由模块
+#### 5.2.2 初始化路由处理函数模块
+#### 5.2.3 使用multer解析 前端传来的 formDate 格式数据
+#### 5.2.4 验证表单数据
+#### 5.2.5 实现发布文章功能
