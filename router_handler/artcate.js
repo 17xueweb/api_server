@@ -74,3 +74,8 @@ exports.getArtCateById = (req, res) => {
         })
     })
 }
+
+// 根据 id 更新文章分类处理函数
+exports.updateCateById = (req, res) => {
+    res.send('ok')
+}
