@@ -14,6 +14,9 @@ app.use(cors())
 // 配置解析表单数据的中间件，注意：这个中间件只能解析 application/x-www-form-urlencoded 格式的表单数据
 app.use(express.urlencoded({extended: false}))
 
+// 托管静态资源文件
+app.use(express.static('./uploads', express.static('./uploads')))
+
 // 一定要在路由之前，封装 res.cc 函数
 app.use((req, res, next) => {
     // status 默认值 为 1，表示失败的情况
