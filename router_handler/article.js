@@ -1,5 +1,5 @@
 // 文章的处理函数模块
-
+// 导入数据库操作模块
 const db = require('../db/index')
 const path = require('path')
 // 发布文章的处理函数
@@ -23,10 +23,10 @@ exports.addArticle = (req, res) => {
         author_id: req.user.id
     }
     console.log(articleInfo);
-    // const sqlStr = 'insert into ev_article_cate set ?'
-    // db.query(sqlStr, articleInfo, (err, results) => {
-    //     if (err) return res.cc(err)
-    //     if (results.affectedRows !== 1) return res.cc('发布文章失败！')
-    //     res.cc('发布文章成功！', 0)
-    // })
+    const sqlStr = 'insert into ev_articles set ?'
+    db.query(sqlStr, articleInfo, (err, results) => {
+        if (err) return res.cc(err)
+        if (results.affectedRows !== 1) return res.cc('发布文章失败！')
+        res.cc('发布文章成功！', 0)
+    })
 }
