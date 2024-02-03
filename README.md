@@ -188,6 +188,12 @@ const sql = 'select * from ev_article_cate where Id <> ? and (name = ? or alias 
 
 #### 5.2.1 初始化路由模块
 #### 5.2.2 初始化路由处理函数模块
-#### 5.2.3 使用multer解析 前端传来的 formDate 格式数据
+#### 5.2.3 使用multer解析 前端传来的 formDate(文件对象) 格式数据
+1. express.urlencoded() 中间件无法解析 multipart/form-data 格式的请求体数据
+2. multer的使用
+```js
+// 创建 multer 的实例对象，通过 dest 属性指定文件的存放路径
+const upload = multer({dest: path.join(__dirname, './uploads')})
+```
 #### 5.2.4 验证表单数据
 #### 5.2.5 实现发布文章功能

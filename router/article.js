@@ -8,6 +8,13 @@ const router = express.Router()
 // 导入需要的处理函数模块
 const article_handler = require('../router_handler/article')
 
+// 导入 multer 和 path
+const multer = require('multer')
+const path = require('path')
+
+// 创建 multer 实例
+const uploads = multer({ dest: path.join(__dirname, '../uploads')})
+
 router.post('/add', article_handler.addArticle)
 
 module.exports = router
