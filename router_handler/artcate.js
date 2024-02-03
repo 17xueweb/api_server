@@ -77,5 +77,22 @@ exports.getArtCateById = (req, res) => {
 
 // 根据 id 更新文章分类处理函数
 exports.updateCateById = (req, res) => {
-    res.send('ok')
+    const sqlStr = 'select * from ev_article_cate where id <> ? and (name = ? or alias = ?)'
+    db.query(sqlStr, [req.body.Id, req.body.name, req.body.alias], (err, results) => {
+        if (err) return res.cc(err)
+        // 提示与的四种情况
+        if (results.length === 2) return res.cc('分类名称和别名被占用，请更换后重试！')
+        if (results.length === 1 && results[0].name === req.body.name && results[0].alias === req.body.alias) {
+            return res.cc('分类名称与别名被占用，请更换后重试！')
+        }
+        if (results.length === 1 &&  results[0].name === req.body.name) {
+            return res.cc('分类名称被占用，请更换后重试！')
+        }
+        if (results.length === 1 && results[0].alias === req.body.alias) {
+            return res.cc('分类别名被占用，请更换后重试！')
+        }
+
+        // TODO:名称和别名都可用，可以执行sql操作
+        res.cc('ok')
+    })
 }
