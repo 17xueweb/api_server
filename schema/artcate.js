@@ -26,3 +26,10 @@ exports.delete_cate_schema = {
         id
     }
 }
+
+// 根据 id 获取文章分类规则对象
+exports.get_cate_schema = {
+    params: {
+        id
+    }
+}

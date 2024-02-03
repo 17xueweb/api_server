@@ -59,3 +59,18 @@ exports.deleteCateById = (req, res) => {
         res.cc('删除文章分类成功！', 0)
     })
 }
+
+// 根据 id 获取文章分类处理函数
+exports.getArtCateById = (req, res) => {
+    const sqlStr = 'select * from ev_article_cate where id = ?'
+    db.query(sqlStr, req.params.id, (err, results) => {
+        if (err) return res.cc(err)
+        // 查询需要判断 results 的长度，更新和删除需要判断 results 的 affectedRows
+        if (results.length !== 1) return res.cc('获取文章分类失败！')
+        res.send({
+            status: 0,
+            message: '获取文章分类成功！',
+            data: results[0]
+        })
+    })
+}
