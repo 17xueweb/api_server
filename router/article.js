@@ -5,8 +5,9 @@ const express = require('express')
 
 const router = express.Router()
 
-router.post('/add', (req, res) => {
-    res.send('ok')
-})
+// 导入需要的处理函数模块
+const article_handler = require('../router_handler/article')
+
+router.post('/add', article_handler.addArticle)
 
 module.exports = router
