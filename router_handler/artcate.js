@@ -93,6 +93,13 @@ exports.updateCateById = (req, res) => {
         }
 
         // TODO:名称和别名都可用，可以执行sql操作
-        res.cc('ok')
+        const sqlStr = 'update ev_article_cate set ? where id = ?'
+        db.query(sqlStr, [req.body, req.body.Id], (err, results) => {
+            if (err) return res.cc(err)
+            if (results.affectedRows !== 1) {
+                return res.cc('更新文章分类失败！')
+            }
+            res.cc('更新文章分类成功！', 0)
+        })
     })
 }

@@ -20,12 +20,12 @@
 
 ### 2.1 新建 ev_users 用户表
 1. 表字段包括：
-        - id int(整数类型) 主键(PK)/不为空(NN)/唯一性(UQ)/自增(AI) 
-        - username varchar(255)字符串 不为空/唯一性
-        - password varchar(255) 不为空
-        - nickname varchar(255) 
-        - email varchar(255)
-        - user_pic text(存储可长可短的字符串，没有最大上限)
+- id int(整数类型) 主键(PK)/不为空(NN)/唯一性(UQ)/自增(AI) 
+- username varchar(255)字符串 不为空/唯一性
+- password varchar(255) 不为空
+- nickname varchar(255) 
+- email varchar(255)
+- user_pic text(存储可长可短的字符串，没有最大上限)
 
 ### 2.2 下载mysql 并 创建数据库连接对象
 
@@ -104,10 +104,10 @@
 ## 4. 文章分类管理
 ### 4.1 新建 ev_article_cate 表 （文章分类表）
 1. 表字段包括：
-        - id int(整数类型) 主键(PK)/不为空(NN)/唯一性(UQ)/自增(AI) 
-        - 分类名称 name varchar(255)  不为空/唯一性
-        - 分类别名 alias  varchar(255) 不为空
-        - 数据是否标记删除 is_delete TINYINT(1)  布尔值  不为空 default为1    0 - 没有被删除， 1 - 被删除
+- id int(整数类型) 主键(PK)/不为空(NN)/唯一性(UQ)/自增(AI) 
+- 分类名称 name varchar(255)  不为空/唯一性
+- 分类别名 alias  varchar(255) 不为空
+- 数据是否标记删除 is_delete TINYINT(1)  布尔值  不为空 default为1    0 - 没有被删除， 1 - 被删除
 
 ### 4.2 获取文章分类列表
 
@@ -167,3 +167,5 @@ const sql = 'select * from ev_article_cate where Id <> ? and (name = ? or alias 
    - 一条数据，同一条数据分类和别名同时被占用
    - 一条数据，分类被占用
    - 一条数据，别名被占用
+
+#### 4.6.3 实现更新文章分类功能
