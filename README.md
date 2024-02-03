@@ -210,5 +210,5 @@ router.post('/add', upload.single('cover_img'), article_handler.addArticle)
 
 2. 验证 req.file 数据
 - 如果没有传 file 文件，req.file值为undefined
-- fieldname 如果不等于 cover_img
+- fieldname 如果不等于 cover_img 也是提示封面为必选参数
 #### 5.2.5 实现发布文章功能
