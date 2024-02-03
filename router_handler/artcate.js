@@ -51,5 +51,11 @@ exports.addArticleCates = (req, res) => {
 
 // 删除文章分类的处理函数
 exports.deleteCateById = (req, res) => {
-    res.send('ok')
+    const sqlStr = 'update ev_article_cate set is_delete = 1 where id = ?'
+    // req.params.id 是因为 我们在定义路由的时候，/deletecate/:id
+    db.query(sqlStr, req.params.id, (err, results) => {
+        if (err) return res.cc(err)
+        if (results.affectedRows !== 1) return res.cc('删除文章分类失败！')
+        res.cc('删除文章分类成功！', 0)
+    })
 }
