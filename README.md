@@ -203,4 +203,6 @@ const upload = multer({dest: path.join(__dirname, './uploads')})
 router.post('/add', upload.single('cover_img'), article_handler.addArticle)
 ```
 #### 5.2.4 验证表单数据
+- joi.string().allow('') 表示允许为空
+- joi.string().valid('已发布', '草稿') 指定允许的合法值
 #### 5.2.5 实现发布文章功能
