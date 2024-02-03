@@ -48,3 +48,8 @@ exports.addArticleCates = (req, res) => {
         })
     })
 }
+
+// 删除文章分类的处理函数
+exports.deleteCateById = (req, res) => {
+    res.send('ok')
+}
