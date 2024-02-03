@@ -191,9 +191,16 @@ const sql = 'select * from ev_article_cate where Id <> ? and (name = ? or alias 
 #### 5.2.3 使用multer解析 前端传来的 formDate(文件对象) 格式数据
 1. express.urlencoded() 中间件无法解析 multipart/form-data 格式的请求体数据
 2. multer的使用
+- 第一步：创建multer实例，通过 dest 属性指定文件的存放路径
 ```js
 // 创建 multer 的实例对象，通过 dest 属性指定文件的存放路径
 const upload = multer({dest: path.join(__dirname, './uploads')})
+```
+- 第二步：调用 upload 实例提供的single()方法，single方法是一个局部生效的中间件，就可以解析 formData 格式表单数据
+```js
+// 先将文件存储到 指定的文件目录中../uploads，然后将文件信息挂载到 req.file中
+// 将文本类型的数据，解析并挂在到 req.body中
+router.post('/add', upload.single('cover_img'), article_handler.addArticle)
 ```
 #### 5.2.4 验证表单数据
 #### 5.2.5 实现发布文章功能

@@ -15,6 +15,6 @@ const path = require('path')
 // 创建 multer 实例
 const uploads = multer({ dest: path.join(__dirname, '../uploads')})
 
-router.post('/add', article_handler.addArticle)
+router.post('/add', uploads.single('cover_img'), article_handler.addArticle)
 
 module.exports = router
